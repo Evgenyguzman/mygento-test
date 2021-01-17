@@ -1,0 +1,60 @@
+/** Validation message **/
+
+span.validation-msg{
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 2px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+}
+span.error{
+  color: #F5222D;
+}
+span.success{
+  color: #2dd60f;
+}
+
+/** Modal **/
+
+.modal-shade,
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.modal-shade {
+  background: rgba(0, 0, 0, 0.4);
+  will-change: opacity;
+  z-index: 2;
+}
+
+.modal-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+.modal {
+  background: white;
+  border-radius: 4px;
+  width: 340px;
+}
+
+@media (min-width: 768px) {
+  .modal {
+    width: 547px;
+  }
+  .modal.privacy-policy {
+    width: 758px;
+  }
+  .privacy-policy-title{
+    text-align: center;
+  }
+}
