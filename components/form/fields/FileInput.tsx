@@ -36,6 +36,11 @@ export const FileInput = React.memo(({ icon, ...props }: any) => {
         )}
       </label>
       <style jsx>{`
+        br {
+          height: 22px;
+          display: none;
+          content: " ";
+        }
         .inputfile {
           width: 0.1px;
           height: 0.1px;
@@ -57,7 +62,7 @@ export const FileInput = React.memo(({ icon, ...props }: any) => {
         }
 
         .inputfile + label.empty {
-          padding: 10px 0;
+          padding: 9px 0;
           text-align: center;
           color: #595959;
           background: #f5f5f5;
@@ -86,6 +91,9 @@ export const FileInput = React.memo(({ icon, ...props }: any) => {
           height: 18px;
         }
         @media (min-width: 768px) {
+          br {
+            display: block;
+          }
           .inputfile + label .icon-plus {
             margin-left: 12px;
           }
