@@ -3,7 +3,7 @@ import React from "react";
 import { ModalWithState } from "../base/Modal";
 import { Button } from "../form/Button";
 
-export const Confirmation = React.memo(({ onConfirm }: any) => {
+export const Confirmation = React.memo(({ onConfirm = (f) => f }: any) => {
   const formik = useFormikContext();
   return (
     <ModalWithState
