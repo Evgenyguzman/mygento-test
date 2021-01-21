@@ -1,7 +1,16 @@
 import { useFormikContext } from "formik";
-import React from "react";
+import React, { FunctionComponent } from "react";
 
-export const Button = React.memo(({ children, disabled, ...props }: any) => {
+interface ButtonProps {
+  [key: string]: any;
+  // need to describe props
+}
+
+export const Button: FunctionComponent<ButtonProps> = ({
+  children,
+  disabled,
+  ...props
+}) => {
   const formik = useFormikContext();
   const isDisabled =
     disabled !== undefined
@@ -49,4 +58,4 @@ export const Button = React.memo(({ children, disabled, ...props }: any) => {
       `}</style>
     </>
   );
-});
+};

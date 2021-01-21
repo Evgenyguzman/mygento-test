@@ -1,6 +1,6 @@
-import React from "react";
-import { ModalWithState } from "../base/Modal";
-import { Button } from "../form/Button";
+import React, { FunctionComponent } from "react";
+import { ModalWithState } from "../../base/Modal/ModalWithState";
+import { Button } from "../../base/Button/Button";
 
 const privacyPolicyData = [
   {
@@ -83,49 +83,55 @@ const privacyPolicyData = [
   },
 ];
 
-export const PrivacyPolicy = React.memo(({ onConfirm }: any) => {
-  return (
-    <ModalWithState
-      className="privacy-policy"
-      ActionComponent={({ onClick }) => {
-        return (
-          <span
-            style={{
-              color: "#3080ED",
-              textDecoration: "underline",
-              cursor: "pointer",
+interface PrivacyPolicyProps {
+  onConfirm?: () => void;
+}
+
+export const PrivacyPolicy: FunctionComponent<PrivacyPolicyProps> = React.memo(
+  ({ onConfirm = () => {} }) => {
+    return (
+      <ModalWithState
+        className="privacy-policy"
+        ActionComponent={({ onClick }) => {
+          return (
+            <span
+              style={{
+                color: "#3080ED",
+                textDecoration: "underline",
+                cursor: "pointer",
+              }}
+              onClick={onClick}
+            >
+              политикой конфиденциальности
+            </span>
+          );
+        }}
+        renderTitle={() => (
+          <h2 className="privacy-policy-title">Политика конфиденциальности</h2>
+        )}
+        renderContent={() =>
+          privacyPolicyData.map((r, i) => (
+            <React.Fragment key={i}>
+              <h3>{r.title}</h3>
+              {r.paragraphs.map((p, i) => (
+                <p key={i}>{p}</p>
+              ))}
+            </React.Fragment>
+          ))
+        }
+        renderButton={(onClose) => (
+          <Button
+            type="button"
+            disabled={false}
+            onClick={() => {
+              onConfirm();
+              onClose();
             }}
-            onClick={onClick}
           >
-            политикой конфиденциальности
-          </span>
-        );
-      }}
-      renderTitle={() => (
-        <h2 className="privacy-policy-title">Политика конфиденциальности</h2>
-      )}
-      renderContent={() =>
-        privacyPolicyData.map((r, i) => (
-          <React.Fragment key={i}>
-            <h3>{r.title}</h3>
-            {r.paragraphs.map((p, i) => (
-              <p key={i}>{p}</p>
-            ))}
-          </React.Fragment>
-        ))
-      }
-      renderButton={(onClose) => (
-        <Button
-          type="button"
-          disabled={false}
-          onClick={() => {
-            onConfirm();
-            onClose();
-          }}
-        >
-          Я согласен
-        </Button>
-      )}
-    />
-  );
-});
+            Я согласен
+          </Button>
+        )}
+      />
+    );
+  }
+);

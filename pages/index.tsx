@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { ContactForm } from "../components/contact/ContactForm";
+import { ContactForm } from "../components/pages/index/ContactForm";
 
 // TODO:
 // describe interfaces for components props

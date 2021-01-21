@@ -1,13 +1,14 @@
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import React, { useState } from "react";
-import { Checkbox } from "../form/fields/Checkbox";
-import { Radiobox, RadioGroup } from "../form/fields/Radiobox";
-import { TextInput } from "../form/fields/TextInput";
+import React, { useCallback } from "react";
+import { Checkbox } from "../../base/Form/Fields/Checkbox/Checkbox";
+import { RadioBox } from "../../base/Form/Fields/Radio/RadioBox/RadioBox";
+import { RadioGroup } from "../../base/Form/Fields/Radio/RadioGroup/RadioGroup";
+import { TextInput } from "../../base/Form/Fields/TextInput/TextInput";
 
 import { PrivacyPolicy } from "./PrivacyPolicy";
 import { Confirmation } from "./Confirmation";
-import { FileInput } from "../form/fields/FileInput";
+import { FileInput } from "../../base/Form/Fields/FileInput/FileInput";
 
 const initialValue = {
   firstName: "",
@@ -16,7 +17,7 @@ const initialValue = {
   file: undefined,
   gender: undefined,
   github: "",
-  aggree: false,
+  agree: false,
 };
 
 const validationSchema = Yup.object({
@@ -33,12 +34,12 @@ const validationSchema = Yup.object({
     .oneOf(["MALE", "FEMALE"], "укажите пол")
     .required("укажите пол"),
   github: Yup.string().url("Проверьте правильность ссылки"),
-  aggree: Yup.boolean()
+  agree: Yup.boolean()
     .isTrue("Согласитесь с политикой кофиденциальности")
     .required("Согласитесь с политикой кофиденциальности"),
 });
 
-export const ContactForm = React.memo(() => {
+export const ContactForm = () => {
   return (
     <>
       <Formik
@@ -84,7 +85,7 @@ export const ContactForm = React.memo(() => {
               name="gender"
               renderTitle={(children) => <h2>Пол * {children}</h2>}
             >
-              <Radiobox
+              <RadioBox
                 type="radio"
                 name="gender"
                 id="male"
@@ -94,8 +95,8 @@ export const ContactForm = React.memo(() => {
                 }}
               >
                 Мужской
-              </Radiobox>
-              <Radiobox
+              </RadioBox>
+              <RadioBox
                 type="radio"
                 name="gender"
                 id="female"
@@ -105,7 +106,7 @@ export const ContactForm = React.memo(() => {
                 }}
               >
                 Женский
-              </Radiobox>
+              </RadioBox>
             </RadioGroup>
           </div>
           <div className="input">
@@ -120,8 +121,8 @@ export const ContactForm = React.memo(() => {
           <div>
             <Checkbox
               type="checkbox"
-              name="aggree"
-              id="aggree"
+              name="agree"
+              id="agree"
               style={{
                 margin: "0 8px 0 0",
               }}
@@ -129,11 +130,11 @@ export const ContactForm = React.memo(() => {
                 <>
                   * Я согласен с{" "}
                   <PrivacyPolicy
-                    onConfirm={() => {
+                    onConfirm={useCallback(() => {
                       field.onChange({
-                        target: { name: "aggree", value: true },
+                        target: { name: "agree", value: true },
                       });
-                    }}
+                    }, [])}
                   />
                 </>
               )}
@@ -159,4 +160,4 @@ export const ContactForm = React.memo(() => {
       `}</style>
     </>
   );
-});
+};

@@ -1,8 +1,17 @@
 import { useField } from "formik";
-import React, { useState } from "react";
-import { FieldWrapper } from "./FieldWrapper";
+import React, { FunctionComponent, useState } from "react";
+import { FieldWrapper } from "../FieldWrapper";
 
-export const Select = React.memo(({ options = [], ...props }: any) => {
+interface SelectProps {
+  name: string;
+  [key: string]: any;
+  // need to describe props
+}
+
+export const Select: FunctionComponent<SelectProps> = ({
+  options = [],
+  ...props
+}) => {
   const [field, meta] = useField(props);
 
   const [isOpened, setIsOpened] = useState(false);
@@ -45,4 +54,4 @@ export const Select = React.memo(({ options = [], ...props }: any) => {
       </div>
     </FieldWrapper>
   );
-});
+};

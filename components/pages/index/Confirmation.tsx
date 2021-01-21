@@ -1,9 +1,15 @@
 import { useFormikContext } from "formik";
-import React from "react";
-import { ModalWithState } from "../base/Modal";
-import { Button } from "../form/Button";
+import React, { FunctionComponent } from "react";
+import { ModalWithState } from "../../base/Modal/ModalWithState";
+import { Button } from "../../base/Button/Button";
 
-export const Confirmation = React.memo(({ onConfirm = (f) => f }: any) => {
+interface ConfirmationProps {
+  onConfirm?: () => void;
+}
+
+export const Confirmation: FunctionComponent<ConfirmationProps> = ({
+  onConfirm = () => {},
+}) => {
   const formik = useFormikContext();
   return (
     <ModalWithState
@@ -37,4 +43,4 @@ export const Confirmation = React.memo(({ onConfirm = (f) => f }: any) => {
       )}
     />
   );
-});
+};

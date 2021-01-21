@@ -1,7 +1,16 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { useField } from "formik";
 
-export const FileInput = React.memo(({ icon, ...props }: any) => {
+interface FileInputProps {
+  name: string;
+  [key: string]: any;
+  // need to describe props
+}
+
+export const FileInput: FunctionComponent<FileInputProps> = ({
+  icon,
+  ...props
+}) => {
   const [field, meta] = useField(props);
   return (
     <div style={{ position: "relative" }}>
@@ -121,4 +130,4 @@ export const FileInput = React.memo(({ icon, ...props }: any) => {
       `}</style>
     </div>
   );
-});
+};
